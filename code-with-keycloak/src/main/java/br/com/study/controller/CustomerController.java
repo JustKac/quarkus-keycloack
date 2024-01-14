@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.study.model.Customer;
 import br.com.study.service.CustomerService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -17,6 +18,7 @@ public class CustomerController {
     CustomerService customerService;
 
     @GET
+    @RolesAllowed("manager")
     public List<Customer> retrieveCustomers(){
         
         List<Customer> customers = new ArrayList<>();
@@ -31,6 +33,7 @@ public class CustomerController {
     }
 
     @POST
+    @RolesAllowed("manager")
     public void addCustomer(Customer customer){
         try {
             customerService.addCustomer(customer);
